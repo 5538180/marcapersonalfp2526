@@ -3,12 +3,12 @@ info:
   title: MarcaPersonalFP - OpenAPI 3.0
   version: 1.0.11
   description: >-
-    AquÃ­ podrÃ¡s encontrar los endpoint de la API del servidor marcapersonalFP
-    basada en la especificaciÃ³n OpenAPI 3.0.
+    Aquí podrás encontrar los endpoint de la API del servidor marcapersonalFP
+    basada en la especificación OpenAPI 3.0.
 
-    El objetivo de este proyecto es la creaciÃ³n de una pÃ¡gina web
-    marcaPersonalFP.es en la que los estudiantes de FormaciÃ³n Profesional puedan
-    publicar su currÃ­culo y los logros conseguidos a lo largo de su estancia en
+    El objetivo de este proyecto es la creación de una página web
+    marcaPersonalFP.es en la que los estudiantes de Formación Profesional puedan
+    publicar su currículo y los logros conseguidos a lo largo de su estancia en
     el centro.
 
 
@@ -20,7 +20,7 @@ info:
     marcapersonalfp.es](https://raw.githubusercontent.com/2DAW-CarlosIII/marcapersonalFP_REA/master/documentos/marcaPersonalFP-usecase.png)
 
 
-    Por su parte, la base de datos que darÃ¡ soporte a la web seguirÃ¡ el
+    Por su parte, la base de datos que dará soporte a la web seguirá el
     siguiente esquema:
 
 
@@ -30,9 +30,9 @@ info:
 
     Enlaces interesantes del proyecto:
 
-    - [PÃ¡gina web en producciÃ³n en el CPIFP Carlos III](https://marcapersonalfp.cifpcarlos3.es/)
+    - [Página web en producción en el CPIFP Carlos III](https://marcapersonalfp.cifpcarlos3.es/)
 
-    - [CÃ³digo fuente de la pÃ¡gina
+    - [Código fuente de la página
     web](https://github.com/2DAW-CarlosIII/marcapersonalFP23_24)
 
     - [Recurso Educativo
@@ -42,7 +42,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 externalDocs:
-  description: Proyecto de innovaciÃ³n
+  description: Proyecto de innovación
   url: >-
     https://github.com/2DAW-CarlosIII/marcapersonalFP_REA/blob/master/documentos/Proyecto%20Marca%20Personal%20FP.pdf
 servers:
@@ -54,7 +54,7 @@ servers:
     description: Entorno de desarrollo local
   - url: https://marcapersonalFP.cifpcarlos3.es/api/v1
     variables: {}
-    description: Entorno de producciÃ³n
+    description: Entorno de producción
   - url: http://marcapersonalFP.test/api/records
     variables: {}
     description: Entorno React
@@ -68,7 +68,7 @@ tags:
   - name: competencia
     description: Operaciones con las competencias
   - name: curriculo
-    description: Operaciones con los currÃ­culos
+    description: Operaciones con los currículos
   - name: empresa
     description: Operaciones con las empresas
   - name: familia_profesional
@@ -107,7 +107,7 @@ paths:
         required: true
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -126,7 +126,7 @@ paths:
       operationId: deleteToken
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
   /login:
     post:
       tags:
@@ -183,8 +183,8 @@ paths:
           description: successful operation
   /{tabla}/count:
     get:
-      summary: NÃºmero de registros de una determinada tabla.
-      description: NÃºmero de registros de una determinada tabla.
+      summary: Número de registros de una determinada tabla.
+      description: Número de registros de una determinada tabla.
       parameters:
         - name: tabla
           in: path
@@ -194,7 +194,7 @@ paths:
             type: string
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -215,29 +215,29 @@ paths:
           required: false
           schema:
             type: string
-        - name: _start
+        - name: page
           in: query
-          description: posiciÃ³n del registro inicial a mostrar
+          description: número de página a mostrar
           required: false
           schema:
             type: integer
             format: int32
-        - name: _end
+        - name: per_page
           in: query
-          description: posiciÃ³n del registro final a mostrar
+          description: número de registros por página
           required: false
           schema:
             type: integer
             format: int32
-        - name: _sort
+        - name: sort
           in: query
           description: columna por la que ordenar
           required: false
           schema:
             type: string
-        - name: _order
+        - name: order
           in: query
-          description: direcciÃ³n de la ordenaciÃ³n
+          description: dirección de la ordenación
           required: false
           schema:
             type: string
@@ -246,7 +246,7 @@ paths:
               - DESC
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -265,8 +265,8 @@ paths:
     post:
       tags:
         - actividad
-      summary: AÃ±ade una nueva actividad
-      description: AÃ±ade una nueva actividad
+      summary: Añade una nueva actividad
+      description: Añade una nueva actividad
       operationId: addActividad
       requestBody:
         description: Crea una nueva Actividad
@@ -283,7 +283,7 @@ paths:
         required: true
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -297,8 +297,8 @@ paths:
     get:
       tags:
         - actividad
-      summary: Encuentra una actividad segÃºn su ID
-      description: Devuelve una Ãºnica actividad
+      summary: Encuentra una actividad según su ID
+      description: Devuelve una única actividad
       operationId: getActividadById
       parameters:
         - name: id
@@ -310,7 +310,7 @@ paths:
             format: int64
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -383,29 +383,29 @@ paths:
           required: false
           schema:
             type: string
-        - name: _start
+        - name: page
           in: query
-          description: posiciÃ³n del registro inicial a mostrar
+          description: número de página a mostrar
           required: false
           schema:
             type: integer
             format: int32
-        - name: _end
+        - name: per_page
           in: query
-          description: posiciÃ³n del registro final a mostrar
+          description: número de registros por página
           required: false
           schema:
             type: integer
             format: int32
-        - name: _sort
+        - name: sort
           in: query
           description: columna por la que ordenar
           required: false
           schema:
             type: string
-        - name: _order
+        - name: order
           in: query
-          description: direcciÃ³n de la ordenaciÃ³n
+          description: dirección de la ordenación
           required: false
           schema:
             type: string
@@ -414,7 +414,7 @@ paths:
               - DESC
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -433,8 +433,8 @@ paths:
     post:
       tags:
         - ciclo
-      summary: AÃ±ade un nuevo ciclo
-      description: AÃ±ade un nuevo ciclo
+      summary: Añade un nuevo ciclo
+      description: Añade un nuevo ciclo
       operationId: addCiclo
       requestBody:
         description: Crea un nuevo Ciclo
@@ -451,7 +451,7 @@ paths:
         required: true
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -465,8 +465,8 @@ paths:
     get:
       tags:
         - ciclo
-      summary: Encuentra un ciclo segÃºn su ID
-      description: Devuelve un Ãºnico ciclo
+      summary: Encuentra un ciclo según su ID
+      description: Devuelve un único ciclo
       operationId: getCicloById
       parameters:
         - name: id
@@ -478,7 +478,7 @@ paths:
             format: int64
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -551,29 +551,29 @@ paths:
           required: false
           schema:
             type: string
-        - name: _start
+        - name: page
           in: query
-          description: posiciÃ³n del registro inicial a mostrar
+          description: número de página a mostrar
           required: false
           schema:
             type: integer
             format: int32
-        - name: _end
+        - name: per_page
           in: query
-          description: posiciÃ³n del registro final a mostrar
+          description: número de registros por página
           required: false
           schema:
             type: integer
             format: int32
-        - name: _sort
+        - name: sort
           in: query
           description: columna por la que ordenar
           required: false
           schema:
             type: string
-        - name: _order
+        - name: order
           in: query
-          description: direcciÃ³n de la ordenaciÃ³n
+          description: dirección de la ordenación
           required: false
           schema:
             type: string
@@ -582,7 +582,7 @@ paths:
               - DESC
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -601,8 +601,8 @@ paths:
     post:
       tags:
         - competencia
-      summary: AÃ±ade una nueva competencia
-      description: AÃ±ade una nueva competencia
+      summary: Añade una nueva competencia
+      description: Añade una nueva competencia
       operationId: addCompetencia
       requestBody:
         description: Crea una nueva Competencia
@@ -619,7 +619,7 @@ paths:
         required: true
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -633,8 +633,8 @@ paths:
     get:
       tags:
         - competencia
-      summary: Encuentra una competencia segÃºn su ID
-      description: Devuelve una Ãºnica competencia
+      summary: Encuentra una competencia según su ID
+      description: Devuelve una única competencia
       operationId: getCompetenciaById
       parameters:
         - name: id
@@ -646,7 +646,7 @@ paths:
             format: int64
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -719,29 +719,29 @@ paths:
           required: false
           schema:
             type: string
-        - name: _start
+        - name: page
           in: query
-          description: posiciÃ³n del registro inicial a mostrar
+          description: número de página a mostrar
           required: false
           schema:
             type: integer
             format: int32
-        - name: _end
+        - name: per_page
           in: query
-          description: posiciÃ³n del registro final a mostrar
+          description: número de registros por página
           required: false
           schema:
             type: integer
             format: int32
-        - name: _sort
+        - name: sort
           in: query
           description: columna por la que ordenar
           required: false
           schema:
             type: string
-        - name: _order
+        - name: order
           in: query
-          description: direcciÃ³n de la ordenaciÃ³n
+          description: dirección de la ordenación
           required: false
           schema:
             type: string
@@ -750,7 +750,7 @@ paths:
               - DESC
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -769,8 +769,8 @@ paths:
     post:
       tags:
         - curriculo
-      summary: AÃ±ade un nuevo curriculo
-      description: AÃ±ade un nuevo curriculo
+      summary: Añade un nuevo curriculo
+      description: Añade un nuevo curriculo
       operationId: addCurriculo
       requestBody:
         description: Crea un nuevo Curriculo
@@ -787,7 +787,7 @@ paths:
         required: true
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -801,8 +801,8 @@ paths:
     get:
       tags:
         - curriculo
-      summary: Encuentra un curriculo segÃºn su ID
-      description: Devuelve un Ãºnico curriculo
+      summary: Encuentra un curriculo según su ID
+      description: Devuelve un único curriculo
       operationId: getCurriculoById
       parameters:
         - name: id
@@ -814,7 +814,7 @@ paths:
             format: int64
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -877,9 +877,9 @@ paths:
     get:
       tags:
         - curriculo
-      summary: Descarga del currÃ­culo PDF de un estudiante
-      description: Descarga del currÃ­culo PDF de un estudiante.
-        Si lo solicita una empresa, se envÃ­a un email al estudiante para que autorice
+      summary: Descarga del currículo PDF de un estudiante
+      description: Descarga del currículo PDF de un estudiante.
+        Si lo solicita una empresa, se envía un email al estudiante para que autorice
       operationId: downloadPDFCurriculoById
       parameters:
         - name: id
@@ -891,7 +891,7 @@ paths:
             format: int64
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
         '400':
           description: Invalid ID supplied
         '404':
@@ -900,8 +900,8 @@ paths:
     get:
       tags:
         - curriculo
-      summary: Autoriza la descarga del currÃ­culo PDF de un estudiante
-      description: Un estudiante autoriza que una empresa descargue su currÃ­culo.
+      summary: Autoriza la descarga del currículo PDF de un estudiante
+      description: Un estudiante autoriza que una empresa descargue su currículo.
       operationId: autorizeDownloadPDFCurriculo
       parameters:
         - name: id
@@ -913,7 +913,7 @@ paths:
             format: int64
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
         '400':
           description: Invalid ID supplied
         '404':
@@ -922,8 +922,8 @@ paths:
     get:
       tags:
         - curriculo
-      summary: Descarga del currÃ­culo PDF de un estudiante
-      description: Una Empresa, a la que se le ha facilitado el md5 de un currÃ­culo,
+      summary: Descarga del currículo PDF de un estudiante
+      description: Una Empresa, a la que se le ha facilitado el md5 de un currículo,
         se le permite la descarga de ese PDF
       operationId: downloadPDFCurriculoByMd5
       parameters:
@@ -942,7 +942,7 @@ paths:
             type: string
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
         '400':
           description: Invalid ID supplied
         '404':
@@ -961,29 +961,29 @@ paths:
           required: false
           schema:
             type: string
-        - name: _start
+        - name: page
           in: query
-          description: posiciÃ³n del registro inicial a mostrar
+          description: número de página a mostrar
           required: false
           schema:
             type: integer
             format: int32
-        - name: _end
+        - name: per_page
           in: query
-          description: posiciÃ³n del registro final a mostrar
+          description: número de registros por página
           required: false
           schema:
             type: integer
             format: int32
-        - name: _sort
+        - name: sort
           in: query
           description: columna por la que ordenar
           required: false
           schema:
             type: string
-        - name: _order
+        - name: order
           in: query
-          description: direcciÃ³n de la ordenaciÃ³n
+          description: dirección de la ordenación
           required: false
           schema:
             type: string
@@ -992,7 +992,7 @@ paths:
               - DESC
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -1011,8 +1011,8 @@ paths:
     post:
       tags:
         - empresa
-      summary: AÃ±ade una nueva empresa
-      description: AÃ±ade una nueva empresa
+      summary: Añade una nueva empresa
+      description: Añade una nueva empresa
       operationId: addEmpresa
       requestBody:
         description: Crea una nueva Empresa
@@ -1029,7 +1029,7 @@ paths:
         required: true
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -1043,8 +1043,8 @@ paths:
     get:
       tags:
         - empresa
-      summary: Encuentra una empresa segÃºn su ID
-      description: Devuelve una Ãºnica empresa
+      summary: Encuentra una empresa según su ID
+      description: Devuelve una única empresa
       operationId: getEmpresaById
       parameters:
         - name: id
@@ -1056,7 +1056,7 @@ paths:
             format: int64
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -1119,8 +1119,8 @@ paths:
     get:
       tags:
         - empresa
-      summary: AutenticaciÃ³n de una empresa con token
-      description: El token se le facilita por correo electrÃ³nico cuando un docente
+      summary: Autenticación de una empresa con token
+      description: El token se le facilita por correo electrónico cuando un docente
         registra la empresa en el sistema
       operationId: accesoEmpresaByToken
       parameters:
@@ -1151,29 +1151,29 @@ paths:
           required: false
           schema:
             type: string
-        - name: _start
+        - name: page
           in: query
-          description: posiciÃ³n del registro inicial a mostrar
+          description: número de página a mostrar
           required: false
           schema:
             type: integer
             format: int32
-        - name: _end
+        - name: per_page
           in: query
-          description: posiciÃ³n del registro final a mostrar
+          description: número de registros por página
           required: false
           schema:
             type: integer
             format: int32
-        - name: _sort
+        - name: sort
           in: query
           description: columna por la que ordenar
           required: false
           schema:
             type: string
-        - name: _order
+        - name: order
           in: query
-          description: direcciÃ³n de la ordenaciÃ³n
+          description: dirección de la ordenación
           required: false
           schema:
             type: string
@@ -1182,7 +1182,7 @@ paths:
               - DESC
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -1201,8 +1201,8 @@ paths:
     post:
       tags:
         - familia_profesional
-      summary: AÃ±ade una nueva familia_profesional
-      description: AÃ±ade una nueva familia_profesional
+      summary: Añade una nueva familia_profesional
+      description: Añade una nueva familia_profesional
       operationId: addFamiliaProfesional
       requestBody:
         description: Crea una nueva Familia Profesional
@@ -1219,7 +1219,7 @@ paths:
         required: true
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -1233,8 +1233,8 @@ paths:
     get:
       tags:
         - familia_profesional
-      summary: Encuentra una familia_profesional segÃºn su ID
-      description: Devuelve una Ãºnica familia_profesional
+      summary: Encuentra una familia_profesional según su ID
+      description: Devuelve una única familia_profesional
       operationId: getFamiliaProfesionalById
       parameters:
         - name: id
@@ -1246,7 +1246,7 @@ paths:
             format: int64
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -1319,29 +1319,29 @@ paths:
           required: false
           schema:
             type: string
-        - name: _start
+        - name: page
           in: query
-          description: posiciÃ³n del registro inicial a mostrar
+          description: número de página a mostrar
           required: false
           schema:
             type: integer
             format: int32
-        - name: _end
+        - name: per_page
           in: query
-          description: posiciÃ³n del registro final a mostrar
+          description: número de registros por página
           required: false
           schema:
             type: integer
             format: int32
-        - name: _sort
+        - name: sort
           in: query
           description: columna por la que ordenar
           required: false
           schema:
             type: string
-        - name: _order
+        - name: order
           in: query
-          description: direcciÃ³n de la ordenaciÃ³n
+          description: dirección de la ordenación
           required: false
           schema:
             type: string
@@ -1350,7 +1350,7 @@ paths:
               - DESC
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -1369,8 +1369,8 @@ paths:
     post:
       tags:
         - idioma
-      summary: AÃ±ade una nueva idioma
-      description: AÃ±ade una nueva idioma
+      summary: Añade una nueva idioma
+      description: Añade una nueva idioma
       operationId: addIdioma
       requestBody:
         description: Crea una nueva Idioma
@@ -1387,7 +1387,7 @@ paths:
         required: true
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -1401,8 +1401,8 @@ paths:
     get:
       tags:
         - idioma
-      summary: Encuentra una idioma segÃºn su ID
-      description: Devuelve una Ãºnica idioma
+      summary: Encuentra una idioma según su ID
+      description: Devuelve una única idioma
       operationId: getIdiomaById
       parameters:
         - name: id
@@ -1414,7 +1414,7 @@ paths:
             format: int64
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -1487,29 +1487,29 @@ paths:
           required: false
           schema:
             type: string
-        - name: _start
+        - name: page
           in: query
-          description: posiciÃ³n del registro inicial a mostrar
+          description: número de página a mostrar
           required: false
           schema:
             type: integer
             format: int32
-        - name: _end
+        - name: per_page
           in: query
-          description: posiciÃ³n del registro final a mostrar
+          description: número de registros por página
           required: false
           schema:
             type: integer
             format: int32
-        - name: _sort
+        - name: sort
           in: query
           description: columna por la que ordenar
           required: false
           schema:
             type: string
-        - name: _order
+        - name: order
           in: query
-          description: direcciÃ³n de la ordenaciÃ³n
+          description: dirección de la ordenación
           required: false
           schema:
             type: string
@@ -1518,7 +1518,7 @@ paths:
               - DESC
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -1537,8 +1537,8 @@ paths:
     post:
       tags:
         - proyecto
-      summary: AÃ±ade un nuevo proyecto
-      description: AÃ±ade un nuevo proyecto
+      summary: Añade un nuevo proyecto
+      description: Añade un nuevo proyecto
       operationId: addProyecto
       requestBody:
         description: Crea un nuevo Proyecto
@@ -1555,7 +1555,7 @@ paths:
         required: true
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -1569,8 +1569,8 @@ paths:
     get:
       tags:
         - proyecto
-      summary: Encuentra un proyecto segÃºn su ID
-      description: Devuelve un Ãºnico proyecto
+      summary: Encuentra un proyecto según su ID
+      description: Devuelve un único proyecto
       operationId: getProyectoById
       parameters:
         - name: id
@@ -1582,7 +1582,7 @@ paths:
             format: int64
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -1663,7 +1663,7 @@ paths:
             type: string
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -1687,29 +1687,29 @@ paths:
           required: false
           schema:
             type: string
-        - name: _start
+        - name: page
           in: query
-          description: posiciÃ³n del registro inicial a mostrar
+          description: número de página a mostrar
           required: false
           schema:
             type: integer
             format: int32
-        - name: _end
+        - name: per_page
           in: query
-          description: posiciÃ³n del registro final a mostrar
+          description: número de registros por página
           required: false
           schema:
             type: integer
             format: int32
-        - name: _sort
+        - name: sort
           in: query
           description: columna por la que ordenar
           required: false
           schema:
             type: string
-        - name: _order
+        - name: order
           in: query
-          description: direcciÃ³n de la ordenaciÃ³n
+          description: dirección de la ordenación
           required: false
           schema:
             type: string
@@ -1718,7 +1718,7 @@ paths:
               - DESC
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -1737,8 +1737,8 @@ paths:
     post:
       tags:
         - reconocimiento
-      summary: AÃ±ade un nuevo reconocimiento
-      description: AÃ±ade un nuevo reconocimiento
+      summary: Añade un nuevo reconocimiento
+      description: Añade un nuevo reconocimiento
       operationId: addReconocimiento
       requestBody:
         description: Crea un nuevo Reconocimiento
@@ -1755,7 +1755,7 @@ paths:
         required: true
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -1769,8 +1769,8 @@ paths:
     get:
       tags:
         - reconocimiento
-      summary: Encuentra un reconocimiento segÃºn su ID
-      description: Devuelve un Ãºnico reconocimiento
+      summary: Encuentra un reconocimiento según su ID
+      description: Devuelve un único reconocimiento
       operationId: getReconocimientoById
       parameters:
         - name: id
@@ -1782,7 +1782,7 @@ paths:
             format: int64
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -1858,7 +1858,7 @@ paths:
             format: int64
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -1883,30 +1883,30 @@ paths:
           schema:
             type: integer
             format: int32
-        - name: _start
+        - name: page
           in: query
-          description: posiciÃ³n del registro inicial a mostrar
+          description: número de página a mostrar
           required: false
           schema:
             type: integer
             format: int32
-        - name: _end
+        - name: per_page
           in: query
-          description: posiciÃ³n del registro final a mostrar
+          description: número de registros por página
           required: false
           schema:
             type: integer
             format: int32
-        - name: _sort
+        - name: sort
           in: query
           description: columna por la que ordenar
           required: false
           schema:
             type: integer
             format: int32
-        - name: _order
+        - name: order
           in: query
-          description: direcciÃ³n de la ordenaciÃ³n
+          description: dirección de la ordenación
           required: false
           schema:
             type: string
@@ -1915,7 +1915,7 @@ paths:
               - DESC
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -1946,30 +1946,30 @@ paths:
           schema:
             type: integer
             format: int32
-        - name: _start
+        - name: page
           in: query
-          description: posiciÃ³n del registro inicial a mostrar
+          description: número de página a mostrar
           required: false
           schema:
             type: integer
             format: int32
-        - name: _end
+        - name: per_page
           in: query
-          description: posiciÃ³n del registro final a mostrar
+          description: número de registros por página
           required: false
           schema:
             type: integer
             format: int32
-        - name: _sort
+        - name: sort
           in: query
           description: columna por la que ordenar
           required: false
           schema:
             type: integer
             format: int32
-        - name: _order
+        - name: order
           in: query
-          description: direcciÃ³n de la ordenaciÃ³n
+          description: dirección de la ordenación
           required: false
           schema:
             type: string
@@ -1978,7 +1978,7 @@ paths:
               - DESC
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -2008,29 +2008,29 @@ paths:
           required: false
           schema:
             type: string
-        - name: _start
+        - name: page
           in: query
-          description: posiciÃ³n del registro inicial a mostrar
+          description: número de página a mostrar
           required: false
           schema:
             type: integer
             format: int32
-        - name: _end
+        - name: per_page
           in: query
-          description: posiciÃ³n del registro final a mostrar
+          description: número de registros por página
           required: false
           schema:
             type: integer
             format: int32
-        - name: _sort
+        - name: sort
           in: query
           description: columna por la que ordenar
           required: false
           schema:
             type: string
-        - name: _order
+        - name: order
           in: query
-          description: direcciÃ³n de la ordenaciÃ³n
+          description: dirección de la ordenación
           required: false
           schema:
             type: string
@@ -2039,7 +2039,7 @@ paths:
               - DESC
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -2058,8 +2058,8 @@ paths:
     post:
       tags:
         - user
-      summary: AÃ±ade un nuevo usuario
-      description: AÃ±ade un nuevo usuario
+      summary: Añade un nuevo usuario
+      description: Añade un nuevo usuario
       operationId: addUser
       requestBody:
         description: Crea un nuevo User
@@ -2076,7 +2076,7 @@ paths:
         required: true
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -2090,8 +2090,8 @@ paths:
     get:
       tags:
         - user
-      summary: Encuentra un usuario segÃºn su ID
-      description: Devuelve un Ãºnico usuario
+      summary: Encuentra un usuario según su ID
+      description: Devuelve un único usuario
       operationId: getUserById
       parameters:
         - name: id
@@ -2103,7 +2103,7 @@ paths:
             format: int64
       responses:
         '200':
-          description: OperaciÃ³n exitosa
+          description: Operación exitosa
           content:
             application/json:
               schema:
@@ -2284,7 +2284,7 @@ components:
           example: 10
         nombre:
           type: string
-          example: autonomÃ­a personal
+          example: autonomía personal
         color:
           type: string
           example: red
@@ -2312,11 +2312,11 @@ components:
           $ref: '#/components/schemas/User'
         video_curriculum:
           type: string
-          description: URL al videocurrÃ­culo
+          description: URL al videocurrículo
           example: https://youtu.be/2in5XMTlSWg
         texto_curriculum:
           type: string
-          description: fichero con el currÃ­culo
+          description: fichero con el currículo
           example: miCurriculo.pdf
       xml:
         name: curriculum
@@ -2364,7 +2364,7 @@ components:
           example: Spanish
         native_name:
           type: string
-          example: EspaÃ±ol
+          example: Español
       xml:
         name: competencia
     FamiliaProfesional:
@@ -2379,7 +2379,7 @@ components:
           example: INF
         nombre:
           type: string
-          example: InformÃ¡tica y Comunicaciones
+          example: Informática y Comunicaciones
       xml:
         name: familia_profesional
     Proyecto:
@@ -2402,7 +2402,7 @@ components:
         metadatos:
           type: object
           format: json
-          description: datos de interÃ©s del proyecto
+          description: datos de interés del proyecto
           example:
             fecha_inicio: '2023-01-15'
             fecha_fin: '2023-05-30'
@@ -2423,7 +2423,7 @@ components:
         documento:
           type: integer
           format: int64
-          description: Documento que evidencia la participaciÃ³n
+          description: Documento que evidencia la participación
           example: 10
         docente_validador:
           $ref: '#/components/schemas/User'
