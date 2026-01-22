@@ -28,28 +28,17 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]); */
 
-<<<<<<< HEAD
-            Schema::disableForeignKeyConstraints();
-         Model::unguard();
-
-=======
         Model::unguard();
         Schema::disableForeignKeyConstraints();
->>>>>>> e49a2b3bf706af79acf4ff614c04f53ab6e083c0
 
         self::seedProyectos();
         $this->command->info('Tabla catálogo inicializada con datos!');
 
         $this->call(FamiliasProfesionalesTableSeeder::class);
-<<<<<<< HEAD
 
         $this->call(CiclosTableSeeder::class);
 
 
-=======
-        $this->call(CiclosTableSeeder::class);
-
->>>>>>> e49a2b3bf706af79acf4ff614c04f53ab6e083c0
         Model::reguard();
         Schema::enableForeignKeyConstraints();
     }
