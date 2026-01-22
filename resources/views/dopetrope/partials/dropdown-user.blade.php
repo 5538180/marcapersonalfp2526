@@ -11,7 +11,7 @@
                     </li>
                     <li>
                         <x-dropdown-link :href="'/api/user'">
-                            {{ __('Datos usuario') }}
+                            {{ __('Users') }}
                         </x-dropdown-link>
                     </li>
                     <li>

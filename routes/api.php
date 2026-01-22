@@ -9,7 +9,7 @@ use Tqdev\PhpCrudApi\Api;
 use Tqdev\PhpCrudApi\Config\Config;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
+    return $request->user()->curriculo;
 });
 
 
@@ -18,7 +18,9 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('familias_profesionales', FamiliaProfesionalController::class)->parameters([
         'familias_profesionales' => 'familiaProfesional'
     ]);
+
 });
+
 
 
 

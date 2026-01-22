@@ -20,21 +20,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+
+         User::factory(10)->create();
 
         /* User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]); */
 
-        Model::unguard();
-        Schema::disableForeignKeyConstraints();
+            Schema::disableForeignKeyConstraints();
+         Model::unguard();
+
 
         self::seedProyectos();
         $this->command->info('Tabla catálogo inicializada con datos!');
+
         $this->call(FamiliasProfesionalesTableSeeder::class);
-        
+
         $this->call(CiclosTableSeeder::class);
+
 
         Model::reguard();
         Schema::enableForeignKeyConstraints();
