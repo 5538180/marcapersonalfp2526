@@ -33,6 +33,8 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+
+
     /**
      * Get the attributes that should be cast.
      *
@@ -44,5 +46,14 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     *
+     *@method curriculo Relacion de usuario a curriculo 1 - 1
+     *
+     */
+    public function curriculo(){
+        return $this->hasOne(Curriculo::class);
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\CicloController;
 use App\Http\Controllers\API\FamiliaProfesionalController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Psr\Http\Message\ServerRequestInterface;
@@ -9,7 +10,9 @@ use Tqdev\PhpCrudApi\Api;
 use Tqdev\PhpCrudApi\Config\Config;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
+
+    return $request->user() . "<br><br>" . $request->user()->curriculo;
+
 });
 
 // Rutas /api/v1
@@ -21,6 +24,7 @@ Route::prefix('v1')->group(function () {
     ->parameters([
         'familias_profesionales' => 'familiaProfesional'
     ]);
+
 
 });
 
