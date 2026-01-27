@@ -16,7 +16,7 @@ class CicloController extends Controller
     {
         $query = Ciclo::query();
         if($query) {
-            $query->orWhere('nombre', 'like', '%' .$request->q . '%');
+            $query->where('nombre', 'like', '%' .$request->q . '%');
         }
         return CicloResource::collection(
             $query->orderBy($request->sort ?? 'id', $request->order ?? 'asc')
