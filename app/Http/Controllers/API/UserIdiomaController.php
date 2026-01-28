@@ -15,7 +15,7 @@ class UserIdiomaController extends Controller
     public function index()
     {
         //
-       /*  return UserIdioma::all(); */
+        /*  return UserIdioma::all(); */
     }
 
     /**
@@ -31,7 +31,7 @@ class UserIdiomaController extends Controller
      */
     public function store(Request $request)
     {
-        /*        $idioma = json_decode($request->getContent(), true);
+       /*  $useridioma = json_decode($request->getContent(), true);
 
         $idioma = Idioma::create($idioma);
 
@@ -70,7 +70,7 @@ class UserIdiomaController extends Controller
      */
     public function destroy(UserIdioma $userIdioma)
     {
-       try {
+        try {
             $userIdioma->delete();
             return response()->json(null, 204);
         } catch (\Exception $e) {
@@ -80,4 +80,3 @@ class UserIdiomaController extends Controller
         }
     }
 }
-

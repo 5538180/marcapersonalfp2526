@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -60,8 +61,14 @@ class User extends Authenticatable
 
     }
 
-     public function idioma() : HasMany
+  /*    public function idioma() : HasMany
     {
         return $this->hasMany(UserIdioma::class, 'idioma_id');
+    }; */
+
+
+       public function idioma(): BelongsToMany
+    {
+        return $this->belongsToMany(Idioma::class, 'users_idiomas', 'user_id', 'idioma_id');
     }
 }

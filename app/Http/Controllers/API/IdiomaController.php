@@ -50,10 +50,10 @@ class IdiomaController extends Controller
      */
     public function update(Request $request, Idioma $idioma)
     {
-        /*   $cicloData = json_decode($request->getContent(), true);
-        $ciclo->update($cicloData);
+          $idiomaData = json_decode($request->getContent(), true);
+        $idioma->update($idiomaData);
 
-        return new CicloResource($ciclo); */
+        return new IdiomaResource($idioma);
     }
 
     /**

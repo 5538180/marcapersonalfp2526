@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -22,9 +23,9 @@ class Idioma extends Model
         "native_name"
     ];
 
-     public function user() : HasMany
+    public function user(): BelongsToMany
     {
-        return $this->hasMany(UserIdioma::class, 'user_id');
+return $this->belongsToMany(User::class, 'users_idiomas', 'user_id', 'idioma_id');
     }
 }
 
