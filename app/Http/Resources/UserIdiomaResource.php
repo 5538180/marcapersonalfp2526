@@ -15,11 +15,10 @@ class UserIdiomaResource extends JsonResource
     public function toArray(Request $request): array
     {
 
-        $usuarioIdioma = parent::toArray($request);
-        $usuarioIdioma["usuario"] =  $this->users_idiomas->name;
-        $usuarioIdioma["idioma"] =  $this->idiomas_users->english_name;
+        $user = parent::toArray($request); // Creamos una variable que almacena la request en json
+        $user["idioma"] = /* new UserResource( */$this->idiomas->english_name/* ) */; // Añadimos una propiedad nueva (idioma) con el idioma usando el metodo magico de user con una onstancia de el para poner el idioma del usuario
 
-        return parent::toArray($request);
+        return $user;
     }
 }
 

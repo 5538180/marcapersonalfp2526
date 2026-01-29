@@ -11,7 +11,7 @@ use App\Models\Idioma;
 class IdiomasApiTest extends TestCase
 {
     use RefreshDatabase;
-
+    protected $seed = true; // Ejecucion de php artisan db:seed antes de cada funcion (prueba test)
     private function idiomaPayload(array $overrides = [])
     {
         return array_merge([
@@ -89,6 +89,7 @@ class IdiomasApiTest extends TestCase
 
     public function test_can_attach_idioma_to_user_and_relations_are_present()
     {
+        $user = User::find(1);
 
         $create = $this->postJson('/api/v1/idiomas', $this->idiomaPayload(['alpha2' => 'fr']));
         $create->assertCreated();
@@ -110,6 +111,7 @@ class IdiomasApiTest extends TestCase
 
     public function test_can_list_user_idiomas_via_api()
     {
+        $user = User::find(1);
 
         $create = $this->postJson('/api/v1/idiomas', $this->idiomaPayload(['alpha2' => 'it']));
         $create->assertCreated();
@@ -125,6 +127,7 @@ class IdiomasApiTest extends TestCase
 
     public function test_can_detach_idioma_from_user_and_relations_are_removed()
     {
+        $user = User::find(1);
 
         $create = $this->postJson('/api/v1/idiomas', $this->idiomaPayload(['alpha2' => 'pt']));
         $create->assertCreated();

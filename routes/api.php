@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\CicloController;
 use App\Http\Controllers\API\FamiliaProfesionalController;
 use App\Http\Controllers\API\IdiomaController;
+use App\Http\Controllers\API\UserIdiomaController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -11,9 +12,8 @@ use Tqdev\PhpCrudApi\Api;
 use Tqdev\PhpCrudApi\Config\Config;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    
-    return $request->user() . "<br><br>" . $request->user()->curriculo;
 
+    return $request->user()/*  . "<br><br>" . $request->user()->curriculo */;
 });
 
 // Rutas /api/v1
@@ -28,6 +28,13 @@ Route::prefix('v1')->group(function () {
 
     Route::apiResource('idiomas', IdiomaController::class);
 
+    //api/vi/user/{user_id}/idioma
+    Route::apiResource('users.idiomas', UserIdiomaController::class)
+    ->parameters([
+        'users'=>'user',
+        'idioma_id'=>'idioma'
+    ])
+    ;
 });
 
 

@@ -14,14 +14,16 @@ class IdiomaController extends Controller
      */
     public function index(Request $request)
     {
- $query = Idioma::query();
+     $query = Idioma::query();
         if($query) {
-            $query->where('id', 'like', '%' .$request->q . '%');
+            $query
+            ->orWhere('english_name', 'like', '%' .$request->q . '%')
+            ->orWhere('native_name', 'like', '%' . $request->q . '%');
         }
+
         return IdiomaResource::collection(
-            Idioma::orderBy($request->sort ?? "id",
-            $request->order ?? "asc",
-            )->paginate($request->per_page));
+            $query->orderBy($request->sort ?? 'id', $request->order ?? 'asc')
+            ->paginate($request->per_page));
 
     }
 
@@ -30,7 +32,7 @@ class IdiomaController extends Controller
      */
     public function store(Request $request)
     {
-       $idioma = json_decode($request->getContent(), true);
+        $idioma = json_decode($request->getContent(), true);
 
         $idioma = Idioma::create($idioma);
 
@@ -42,7 +44,7 @@ class IdiomaController extends Controller
      */
     public function show(Idioma $idioma)
     {
-        return new IdiomaResource($idioma);
+         return new IdiomaResource($idioma);
     }
 
     /**

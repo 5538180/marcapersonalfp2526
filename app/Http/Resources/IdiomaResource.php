@@ -17,7 +17,9 @@ class IdiomaResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        $idioma = parent::toArray($request); // Creamos una variable que almacena la request en json
+      /*   $idioma["idioma_user"]= new UserIdiomaResource($this->users); */ // Creamos una nueva propiedad en el idioma con una instancia nueva de la tabla pivot con el metodo de idioma user que devuelve el idioam del usuario
+        return $idioma; // Devolvemos todo
     }
 }
 

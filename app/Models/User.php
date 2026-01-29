@@ -67,8 +67,8 @@ class User extends Authenticatable
     }; */
 
 
-       public function idioma(): BelongsToMany
+       public function idiomas(): BelongsToMany
     {
-        return $this->belongsToMany(Idioma::class, 'users_idiomas', 'user_id', 'idioma_id');
+        return $this->belongsToMany(Idioma::class, 'idioma_user', 'user_id','idioma_id' );
     }
 }

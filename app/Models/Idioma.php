@@ -23,9 +23,9 @@ class Idioma extends Model
         "native_name"
     ];
 
-    public function user(): BelongsToMany
+    public function users(): BelongsToMany // Metodo para relaciona N-M en tra las 3 tablas // Clase del modelo a relacionar, tabla pivot, fk tu clase,fk de la clase a relacionar
     {
-return $this->belongsToMany(User::class, 'users_idiomas', 'user_id', 'idioma_id');
+return $this->belongsToMany(User::class, 'idioma_user', 'idioma_id', 'user_id');
     }
 }
 
