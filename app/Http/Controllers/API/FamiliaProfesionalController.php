@@ -32,7 +32,7 @@ class FamiliaProfesionalController extends Controller
      */
     public function show(FamiliaProfesional $familiaProfesional)
     {
-
+        return new FamiliaProfesionalResource($familiaProfesional);
     }
 
     /**

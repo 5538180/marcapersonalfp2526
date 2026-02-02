@@ -14,6 +14,10 @@ class FamiliaProfesionalResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        $familiaProfesional = parent::toArray($request);
+        $familiaProfesional['ciclos'] = CicloResource::collection($this->ciclos);
+        unset($familiaProfesional['created_at']);
+        unset($familiaProfesional['updated_at']);
+        return $familiaProfesional;
     }
 }
