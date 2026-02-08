@@ -59,6 +59,8 @@ class MenuOpcionController extends Controller
             ])
             ->values();
 
-        return response()->json($opciones);
+        return response()->json([
+            'administrador' => $opciones,
+        ]);
     }
 }

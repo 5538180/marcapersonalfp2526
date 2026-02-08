@@ -15,19 +15,19 @@ use Psr\Http\Message\ServerRequestInterface;
 use Tqdev\PhpCrudApi\Api;
 use Tqdev\PhpCrudApi\Config\Config;
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+Route::get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::prefix('v1')->group(function () {
     // Tokens (Sanctum)
     Route::post('tokens', [TokenController::class, 'store']);
-    Route::delete('tokens', [TokenController::class, 'destroy'])->middleware('auth:sanctum');
+    Route::delete('tokens', [TokenController::class, 'destroy']);
 
     // Endpoints ya existentes en el proyecto
     Route::apiResource('ciclos', CicloController::class);
 
-    Route::middleware(['auth:sanctum'])->apiResource('curriculos', CurriculoController::class);
+    Route::apiResource('curriculos', CurriculoController::class);
 
     Route::apiResource('familias_profesionales', FamiliaProfesionalController::class)
         ->parameters([
@@ -40,16 +40,14 @@ Route::prefix('v1')->group(function () {
     Route::get('modulos/matriculados', [ModuloController::class, 'matriculados']);
     Route::get('menu/administrador', [MenuOpcionController::class, 'administrador']);
 
-    // CRUD REST
-    Route::middleware(['auth:sanctum'])->group(function () {
-        Route::apiResource('roles', RoleController::class)->except(['index']);
-        Route::apiResource('modulos', ModuloController::class);
-        Route::apiResource('matriculas', MatriculaController::class);
-        Route::apiResource('docentes-modulos', DocenteModuloController::class)
-            ->parameters(['docentes-modulos' => 'docenteModulo']);
-        Route::apiResource('menu-opciones', MenuOpcionController::class)
-            ->parameters(['menu-opciones' => 'menuOpcion']);
-    });
+    // CRUD REST (temporalmente sin auth)
+    Route::apiResource('roles', RoleController::class)->except(['index']);
+    Route::apiResource('modulos', ModuloController::class);
+    Route::apiResource('matriculas', MatriculaController::class);
+    Route::apiResource('docentes-modulos', DocenteModuloController::class)
+        ->parameters(['docentes-modulos' => 'docenteModulo']);
+    Route::apiResource('menu-opciones', MenuOpcionController::class)
+        ->parameters(['menu-opciones' => 'menuOpcion']);
 });
 
 // Rutas PHP-CRUD-API existentes
@@ -71,4 +69,4 @@ Route::any('/{any}', function (ServerRequestInterface $request) {
     }
 
     return $response;
-})->where('any', '.*')->middleware(['auth:sanctum']);
+})->where('any', '.*');

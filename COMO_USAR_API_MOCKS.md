@@ -120,7 +120,7 @@ php artisan serve
 Base URL recomendada (entorno local con dominio):
 
 ```text
-http://marcapersonal.test
+http://marcapersonalfp.test
 ```
 
 Si usas `php artisan serve`, usa:
@@ -135,12 +135,18 @@ http://127.0.0.1:8000
 - `antonio@example.com` / `password`
 - `alberto@example.com` / `password`
 
-## 3) Autenticacion (Sanctum)
+## 3) Autenticacion (estado actual)
+
+Actualmente la API esta abierta temporalmente (sin `auth:sanctum`) para pruebas.
+
+Puedes consumir todos los endpoints sin token.
+
+Sanctum sigue disponible por si quieres volver a activarlo.
 
 Generar token:
 
 ```bash
-curl -X POST http://marcapersonal.test/api/v1/tokens \
+curl -X POST http://marcapersonalfp.test/api/v1/tokens \
   -H "Content-Type: application/json" \
   -d '{"email":"victor@example.com","password":"password"}'
 ```
@@ -160,7 +166,7 @@ Usar token:
 -H "Authorization: Bearer TU_TOKEN"
 ```
 
-## 4) Fallback solo desarrollo local
+## 4) Fallback usuario (si quieres forzar usuario)
 
 Si no usas token en local/testing:
 
@@ -170,20 +176,20 @@ Si no usas token en local/testing:
 Ejemplo:
 
 ```bash
-curl "http://marcapersonal.test/api/v1/roles?user=Victor"
+curl "http://marcapersonalfp.test/api/v1/roles?user=Victor"
 ```
 
 ## 5) Endpoints que reemplazan mocks (formato exacto frontend)
 
 ### GET `/api/v1/roles`
 
-Devuelve objeto del usuario conectado:
+Devuelve exactamente el objeto del mock de roles:
 
 ```json
 {
-  "id": 1,
-  "name": "Victor",
-  "roles": ["docente", "estudiante", "administrador"]
+  "Victor": { "id": 1, "name": "Víctor", "roles": ["docente", "estudiante", "administrador"] },
+  "Antonio": { "id": 2, "name": "Antonio", "roles": ["estudiante"] },
+  "Alberto": { "id": 3, "name": "Alberto", "roles": ["docente", "administrador"] }
 }
 ```
 
@@ -191,10 +197,19 @@ Devuelve objeto del usuario conectado:
 
 ```json
 {
-  "buscando": false,
-  "lista": [
-    { "id": 12, "ciclo_formativo_id": 91, "nombre": "Desarrollo web en entorno cliente", "codigo": "0612" }
-  ]
+  "Victor": {
+    "buscando": false,
+    "lista": [
+      { "id": 12, "ciclo_formativo_id": 91, "nombre": "Desarrollo web en entorno cliente", "codigo": "0612" },
+      { "id": 13, "ciclo_formativo_id": 91, "nombre": "Sistemas Informáticos", "codigo": "0483" }
+    ]
+  },
+  "Alberto": {
+    "buscando": false,
+    "lista": [
+      { "id": 14, "ciclo_formativo_id": 91, "nombre": "Desarrollo web en entorno servidor", "codigo": "0613" }
+    ]
+  }
 }
 ```
 
@@ -202,23 +217,35 @@ Devuelve objeto del usuario conectado:
 
 ```json
 {
-  "buscando": false,
-  "lista": [
-    { "id": 12, "ciclo_formativo_id": 91, "nombre": "Desarrollo web en entorno cliente", "codigo": "0612" }
-  ]
+  "Victor": {
+    "buscando": false,
+    "lista": [
+      { "id": 12, "ciclo_formativo_id": 91, "nombre": "Desarrollo web en entorno cliente", "codigo": "0612" },
+      { "id": 13, "ciclo_formativo_id": 91, "nombre": "Desarrollo web en entorno servidor", "codigo": "0613" },
+      { "id": 14, "ciclo_formativo_id": 91, "nombre": "Entornos de Desarrollo", "codigo": "0487" }
+    ]
+  },
+  "Antonio": {
+    "buscando": false,
+    "lista": [
+      { "id": 12, "ciclo_formativo_id": 91, "nombre": "Desarrollo web en entorno cliente", "codigo": "0612" }
+    ]
+  }
 }
 ```
 
 ### GET `/api/v1/menu/administrador`
 
 ```json
-[
-  { "nombre": "Familias profesionales", "ruta": "/familiasprofesionales" },
-  { "nombre": "Ciclos formativos", "ruta": "/ciclosformativos" }
-]
+{
+  "administrador": [
+    { "nombre": "Familias profesionales", "ruta": "/familiasprofesionales" },
+    { "nombre": "Ciclos formativos", "ruta": "/ciclosformativos" }
+  ]
+}
 ```
 
-## 5.1) Rutas exactas de endpoints
+## 5.1) Rutas exactas de endpoints (metodo + URL completa)
 
 Prefijo base de API:
 
@@ -229,62 +256,62 @@ Prefijo base de API:
 Base URL recomendada:
 
 ```text
-http://marcapersonal.test/api/v1
+http://marcapersonalfp.test/api/v1
 ```
 
 Endpoints de frontend (reemplazo de mocks):
 
-- `POST /api/v1/tokens`
-- `DELETE /api/v1/tokens`
-- `GET /api/v1/roles`
-- `GET /api/v1/modulos/impartidos`
-- `GET /api/v1/modulos/matriculados`
-- `GET /api/v1/menu/administrador`
+- `POST http://marcapersonalfp.test/api/v1/tokens`
+- `DELETE http://marcapersonalfp.test/api/v1/tokens`
+- `GET http://marcapersonalfp.test/api/v1/roles`
+- `GET http://marcapersonalfp.test/api/v1/modulos/impartidos`
+- `GET http://marcapersonalfp.test/api/v1/modulos/matriculados`
+- `GET http://marcapersonalfp.test/api/v1/menu/administrador`
 
 CRUD Roles:
 
-- `GET /api/v1/roles?crud=1`
-- `POST /api/v1/roles`
-- `GET /api/v1/roles/{role}`
-- `PUT /api/v1/roles/{role}`
-- `PATCH /api/v1/roles/{role}`
-- `DELETE /api/v1/roles/{role}`
+- `GET http://marcapersonalfp.test/api/v1/roles?crud=1`
+- `POST http://marcapersonalfp.test/api/v1/roles`
+- `GET http://marcapersonalfp.test/api/v1/roles/{role}`
+- `PUT http://marcapersonalfp.test/api/v1/roles/{role}`
+- `PATCH http://marcapersonalfp.test/api/v1/roles/{role}`
+- `DELETE http://marcapersonalfp.test/api/v1/roles/{role}`
 
 CRUD Modulos:
 
-- `GET /api/v1/modulos`
-- `POST /api/v1/modulos`
-- `GET /api/v1/modulos/{modulo}`
-- `PUT /api/v1/modulos/{modulo}`
-- `PATCH /api/v1/modulos/{modulo}`
-- `DELETE /api/v1/modulos/{modulo}`
+- `GET http://marcapersonalfp.test/api/v1/modulos`
+- `POST http://marcapersonalfp.test/api/v1/modulos`
+- `GET http://marcapersonalfp.test/api/v1/modulos/{modulo}`
+- `PUT http://marcapersonalfp.test/api/v1/modulos/{modulo}`
+- `PATCH http://marcapersonalfp.test/api/v1/modulos/{modulo}`
+- `DELETE http://marcapersonalfp.test/api/v1/modulos/{modulo}`
 
 CRUD Matriculas:
 
-- `GET /api/v1/matriculas`
-- `POST /api/v1/matriculas`
-- `GET /api/v1/matriculas/{matricula}`
-- `PUT /api/v1/matriculas/{matricula}`
-- `PATCH /api/v1/matriculas/{matricula}`
-- `DELETE /api/v1/matriculas/{matricula}`
+- `GET http://marcapersonalfp.test/api/v1/matriculas`
+- `POST http://marcapersonalfp.test/api/v1/matriculas`
+- `GET http://marcapersonalfp.test/api/v1/matriculas/{matricula}`
+- `PUT http://marcapersonalfp.test/api/v1/matriculas/{matricula}`
+- `PATCH http://marcapersonalfp.test/api/v1/matriculas/{matricula}`
+- `DELETE http://marcapersonalfp.test/api/v1/matriculas/{matricula}`
 
 CRUD Docentes-Modulos:
 
-- `GET /api/v1/docentes-modulos`
-- `POST /api/v1/docentes-modulos`
-- `GET /api/v1/docentes-modulos/{docenteModulo}`
-- `PUT /api/v1/docentes-modulos/{docenteModulo}`
-- `PATCH /api/v1/docentes-modulos/{docenteModulo}`
-- `DELETE /api/v1/docentes-modulos/{docenteModulo}`
+- `GET http://marcapersonalfp.test/api/v1/docentes-modulos`
+- `POST http://marcapersonalfp.test/api/v1/docentes-modulos`
+- `GET http://marcapersonalfp.test/api/v1/docentes-modulos/{docenteModulo}`
+- `PUT http://marcapersonalfp.test/api/v1/docentes-modulos/{docenteModulo}`
+- `PATCH http://marcapersonalfp.test/api/v1/docentes-modulos/{docenteModulo}`
+- `DELETE http://marcapersonalfp.test/api/v1/docentes-modulos/{docenteModulo}`
 
 CRUD Menu-Opciones:
 
-- `GET /api/v1/menu-opciones`
-- `POST /api/v1/menu-opciones`
-- `GET /api/v1/menu-opciones/{menuOpcion}`
-- `PUT /api/v1/menu-opciones/{menuOpcion}`
-- `PATCH /api/v1/menu-opciones/{menuOpcion}`
-- `DELETE /api/v1/menu-opciones/{menuOpcion}`
+- `GET http://marcapersonalfp.test/api/v1/menu-opciones`
+- `POST http://marcapersonalfp.test/api/v1/menu-opciones`
+- `GET http://marcapersonalfp.test/api/v1/menu-opciones/{menuOpcion}`
+- `PUT http://marcapersonalfp.test/api/v1/menu-opciones/{menuOpcion}`
+- `PATCH http://marcapersonalfp.test/api/v1/menu-opciones/{menuOpcion}`
+- `DELETE http://marcapersonalfp.test/api/v1/menu-opciones/{menuOpcion}`
 
 ## 6) CRUD REST disponibles (auth:sanctum)
 
@@ -305,37 +332,37 @@ Formato:
 Roles (frontend):
 
 ```bash
-curl http://marcapersonal.test/api/v1/roles \
+curl http://marcapersonalfp.test/api/v1/roles \
   -H "Authorization: Bearer TU_TOKEN"
 ```
 
 Impartidos:
 
 ```bash
-curl http://marcapersonal.test/api/v1/modulos/impartidos \
+curl http://marcapersonalfp.test/api/v1/modulos/impartidos \
   -H "Authorization: Bearer TU_TOKEN"
 ```
 
 Matriculados:
 
 ```bash
-curl http://marcapersonal.test/api/v1/modulos/matriculados \
+curl http://marcapersonalfp.test/api/v1/modulos/matriculados \
   -H "Authorization: Bearer TU_TOKEN"
 ```
 
 Menu administrador:
 
 ```bash
-curl http://marcapersonal.test/api/v1/menu/administrador
+curl http://marcapersonalfp.test/api/v1/menu/administrador
 ```
 
 CRUD modulos:
 
 ```bash
-curl http://marcapersonal.test/api/v1/modulos \
+curl http://marcapersonalfp.test/api/v1/modulos \
   -H "Authorization: Bearer TU_TOKEN"
 
-curl -X POST http://marcapersonal.test/api/v1/modulos \
+curl -X POST http://marcapersonalfp.test/api/v1/modulos \
   -H "Authorization: Bearer TU_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"ciclo_formativo_id":92,"nombre":"Modulo API","codigo":"M92"}'

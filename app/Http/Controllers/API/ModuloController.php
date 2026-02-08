@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\API\Concerns\ApiResponseHelpers;
-use App\Http\Controllers\API\Concerns\ResolvesApiUser;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreModuloRequest;
 use App\Http\Requests\UpdateModuloRequest;
@@ -11,12 +10,11 @@ use App\Http\Resources\ModuloResource;
 use App\Models\DocenteModulo;
 use App\Models\Matricula;
 use App\Models\Modulo;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 
 class ModuloController extends Controller
 {
     use ApiResponseHelpers;
-    use ResolvesApiUser;
 
     public function index()
     {
@@ -52,63 +50,67 @@ class ModuloController extends Controller
         return $this->deleteModel($modulo);
     }
 
-    public function impartidos(Request $request)
+    public function impartidos()
     {
-        $user = $this->resolveApiUser($request);
-        if (! $user) {
-            return response()->json(['message' => 'Unauthenticated.'], 401);
-        }
-
-        $lista = DocenteModulo::query()
-            ->where('user_id', $user->id)
-            ->orderBy('modulo_id')
-            ->get([
-                'modulo_id as id',
-                'ciclo_formativo_id',
-                'nombre',
-                'codigo',
-            ])
-            ->map(fn (DocenteModulo $item) => [
-                'id' => $item->id,
-                'ciclo_formativo_id' => $item->ciclo_formativo_id,
-                'nombre' => $item->nombre,
-                'codigo' => $item->codigo,
-            ])
-            ->values();
-
-        return response()->json([
-            'buscando' => false,
-            'lista' => $lista,
-        ]);
+        return response()->json(
+            $this->buildMockModulesShape(
+                DocenteModulo::class,
+                [1 => 'Victor', 3 => 'Alberto']
+            )
+        );
     }
 
-    public function matriculados(Request $request)
+    public function matriculados()
     {
-        $user = $this->resolveApiUser($request);
-        if (! $user) {
-            return response()->json(['message' => 'Unauthenticated.'], 401);
+        return response()->json(
+            $this->buildMockModulesShape(
+                Matricula::class,
+                [1 => 'Victor', 2 => 'Antonio']
+            )
+        );
+    }
+
+    /**
+     * @param class-string<Model> $modelClass
+     * @param array<int, string> $usersById
+     * @return array<string, array<string, mixed>>
+     */
+    private function buildMockModulesShape(string $modelClass, array $usersById): array
+    {
+        $shape = [];
+        foreach ($usersById as $mockKey) {
+            $shape[$mockKey] = [
+                'buscando' => false,
+                'lista' => [],
+            ];
         }
 
-        $lista = Matricula::query()
-            ->where('user_id', $user->id)
+        $rows = $modelClass::query()
+            ->whereIn('user_id', array_keys($usersById))
+            ->orderBy('user_id')
             ->orderBy('modulo_id')
             ->get([
+                'user_id',
                 'modulo_id as id',
                 'ciclo_formativo_id',
                 'nombre',
                 'codigo',
-            ])
-            ->map(fn (Matricula $item) => [
-                'id' => $item->id,
-                'ciclo_formativo_id' => $item->ciclo_formativo_id,
-                'nombre' => $item->nombre,
-                'codigo' => $item->codigo,
-            ])
-            ->values();
+            ]);
 
-        return response()->json([
-            'buscando' => false,
-            'lista' => $lista,
-        ]);
+        foreach ($rows as $row) {
+            $mockKey = $usersById[(int) $row->user_id] ?? null;
+            if (! $mockKey) {
+                continue;
+            }
+
+            $shape[$mockKey]['lista'][] = [
+                'id' => (int) $row->id,
+                'ciclo_formativo_id' => (int) $row->ciclo_formativo_id,
+                'nombre' => $row->nombre,
+                'codigo' => $row->codigo,
+            ];
+        }
+
+        return $shape;
     }
 }
