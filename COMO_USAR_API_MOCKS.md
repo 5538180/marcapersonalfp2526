@@ -117,7 +117,13 @@ php artisan migrate --seed --force
 php artisan serve
 ```
 
-Base URL local:
+Base URL recomendada (entorno local con dominio):
+
+```text
+http://marcapersonal.test
+```
+
+Si usas `php artisan serve`, usa:
 
 ```text
 http://127.0.0.1:8000
@@ -134,7 +140,7 @@ http://127.0.0.1:8000
 Generar token:
 
 ```bash
-curl -X POST http://127.0.0.1:8000/api/v1/tokens \
+curl -X POST http://marcapersonal.test/api/v1/tokens \
   -H "Content-Type: application/json" \
   -d '{"email":"victor@example.com","password":"password"}'
 ```
@@ -164,7 +170,7 @@ Si no usas token en local/testing:
 Ejemplo:
 
 ```bash
-curl "http://127.0.0.1:8000/api/v1/roles?user=Victor"
+curl "http://marcapersonal.test/api/v1/roles?user=Victor"
 ```
 
 ## 5) Endpoints que reemplazan mocks (formato exacto frontend)
@@ -212,6 +218,74 @@ Devuelve objeto del usuario conectado:
 ]
 ```
 
+## 5.1) Rutas exactas de endpoints
+
+Prefijo base de API:
+
+```text
+/api/v1
+```
+
+Base URL recomendada:
+
+```text
+http://marcapersonal.test/api/v1
+```
+
+Endpoints de frontend (reemplazo de mocks):
+
+- `POST /api/v1/tokens`
+- `DELETE /api/v1/tokens`
+- `GET /api/v1/roles`
+- `GET /api/v1/modulos/impartidos`
+- `GET /api/v1/modulos/matriculados`
+- `GET /api/v1/menu/administrador`
+
+CRUD Roles:
+
+- `GET /api/v1/roles?crud=1`
+- `POST /api/v1/roles`
+- `GET /api/v1/roles/{role}`
+- `PUT /api/v1/roles/{role}`
+- `PATCH /api/v1/roles/{role}`
+- `DELETE /api/v1/roles/{role}`
+
+CRUD Modulos:
+
+- `GET /api/v1/modulos`
+- `POST /api/v1/modulos`
+- `GET /api/v1/modulos/{modulo}`
+- `PUT /api/v1/modulos/{modulo}`
+- `PATCH /api/v1/modulos/{modulo}`
+- `DELETE /api/v1/modulos/{modulo}`
+
+CRUD Matriculas:
+
+- `GET /api/v1/matriculas`
+- `POST /api/v1/matriculas`
+- `GET /api/v1/matriculas/{matricula}`
+- `PUT /api/v1/matriculas/{matricula}`
+- `PATCH /api/v1/matriculas/{matricula}`
+- `DELETE /api/v1/matriculas/{matricula}`
+
+CRUD Docentes-Modulos:
+
+- `GET /api/v1/docentes-modulos`
+- `POST /api/v1/docentes-modulos`
+- `GET /api/v1/docentes-modulos/{docenteModulo}`
+- `PUT /api/v1/docentes-modulos/{docenteModulo}`
+- `PATCH /api/v1/docentes-modulos/{docenteModulo}`
+- `DELETE /api/v1/docentes-modulos/{docenteModulo}`
+
+CRUD Menu-Opciones:
+
+- `GET /api/v1/menu-opciones`
+- `POST /api/v1/menu-opciones`
+- `GET /api/v1/menu-opciones/{menuOpcion}`
+- `PUT /api/v1/menu-opciones/{menuOpcion}`
+- `PATCH /api/v1/menu-opciones/{menuOpcion}`
+- `DELETE /api/v1/menu-opciones/{menuOpcion}`
+
 ## 6) CRUD REST disponibles (auth:sanctum)
 
 - `apiResource /api/v1/roles` (nota: `GET /roles` normal es endpoint frontend; para listado CRUD usar `GET /roles?crud=1`)
@@ -231,37 +305,37 @@ Formato:
 Roles (frontend):
 
 ```bash
-curl http://127.0.0.1:8000/api/v1/roles \
+curl http://marcapersonal.test/api/v1/roles \
   -H "Authorization: Bearer TU_TOKEN"
 ```
 
 Impartidos:
 
 ```bash
-curl http://127.0.0.1:8000/api/v1/modulos/impartidos \
+curl http://marcapersonal.test/api/v1/modulos/impartidos \
   -H "Authorization: Bearer TU_TOKEN"
 ```
 
 Matriculados:
 
 ```bash
-curl http://127.0.0.1:8000/api/v1/modulos/matriculados \
+curl http://marcapersonal.test/api/v1/modulos/matriculados \
   -H "Authorization: Bearer TU_TOKEN"
 ```
 
 Menu administrador:
 
 ```bash
-curl http://127.0.0.1:8000/api/v1/menu/administrador
+curl http://marcapersonal.test/api/v1/menu/administrador
 ```
 
 CRUD modulos:
 
 ```bash
-curl http://127.0.0.1:8000/api/v1/modulos \
+curl http://marcapersonal.test/api/v1/modulos \
   -H "Authorization: Bearer TU_TOKEN"
 
-curl -X POST http://127.0.0.1:8000/api/v1/modulos \
+curl -X POST http://marcapersonal.test/api/v1/modulos \
   -H "Authorization: Bearer TU_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"ciclo_formativo_id":92,"nombre":"Modulo API","codigo":"M92"}'
