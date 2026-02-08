@@ -34,6 +34,10 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Tabla catálogo inicializada con datos!');
         $this->call(FamiliasProfesionalesTableSeeder::class);
         $this->call(CiclosTableSeeder::class);
+        $this->call(MockUsersSeeder::class);
+        $this->call(MockRolesSeeder::class);
+        $this->call(MockModulosSeeder::class);
+        $this->call(MockMenuOpcionesSeeder::class);
 
         Model::reguard();
         Schema::enableForeignKeyConstraints();

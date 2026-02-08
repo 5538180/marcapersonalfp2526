@@ -1,9 +1,13 @@
 <?php
 
 use App\Http\Controllers\API\CicloController;
-
 use App\Http\Controllers\API\CurriculoController;
+use App\Http\Controllers\API\DocenteModuloController;
 use App\Http\Controllers\API\FamiliaProfesionalController;
+use App\Http\Controllers\API\MatriculaController;
+use App\Http\Controllers\API\MenuOpcionController;
+use App\Http\Controllers\API\ModuloController;
+use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\TokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,40 +19,40 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Rutas /api/v1
-
 Route::prefix('v1')->group(function () {
+    // Tokens (Sanctum)
+    Route::post('tokens', [TokenController::class, 'store']);
+    Route::delete('tokens', [TokenController::class, 'destroy'])->middleware('auth:sanctum');
+
+    // Endpoints ya existentes en el proyecto
     Route::apiResource('ciclos', CicloController::class);
 
     Route::middleware(['auth:sanctum'])->apiResource('curriculos', CurriculoController::class);
 
     Route::apiResource('familias_profesionales', FamiliaProfesionalController::class)
         ->parameters([
-            'familias_profesionales' => 'familiaProfesional'
+            'familias_profesionales' => 'familiaProfesional',
         ]);
 
-        // en esta rama no esta
-   /*  Route::middleware('auth:sanctum')->group(function () {
-        Route::get('/user', function (Request $request) {
-            $user = $request->user();
-            $user->fullName = $user->nombre . ' ' . $user->apellidos;
-            return $user;
-        }); */
+    // Endpoints exactos para frontend (auth por Sanctum o fallback dev en controlador)
+    Route::get('roles', [RoleController::class, 'index']);
+    Route::get('modulos/impartidos', [ModuloController::class, 'impartidos']);
+    Route::get('modulos/matriculados', [ModuloController::class, 'matriculados']);
+    Route::get('menu/administrador', [MenuOpcionController::class, 'administrador']);
+
+    // CRUD REST
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::apiResource('roles', RoleController::class)->except(['index']);
+        Route::apiResource('modulos', ModuloController::class);
+        Route::apiResource('matriculas', MatriculaController::class);
+        Route::apiResource('docentes-modulos', DocenteModuloController::class)
+            ->parameters(['docentes-modulos' => 'docenteModulo']);
+        Route::apiResource('menu-opciones', MenuOpcionController::class)
+            ->parameters(['menu-opciones' => 'menuOpcion']);
     });
-
-
-
-    // emite un nuevo token
-    Route::post('tokens', [TokenController::class, 'store']);
-    // elimina el token del usuario autenticado
-    Route::delete('tokens', [TokenController::class, 'destroy'])->middleware('auth:sanctum');
 });
 
-
-
-
-
-// Rutas PHP-CRUD-API
+// Rutas PHP-CRUD-API existentes
 Route::any('/{any}', function (ServerRequestInterface $request) {
     $config = new Config([
         'address' => env('DB_HOST', '127.0.0.1'),
@@ -65,5 +69,6 @@ Route::any('/{any}', function (ServerRequestInterface $request) {
         $response = response()->json($records, 200, $headers = ['X-Total-Count' => count($records)]);
     } catch (\Throwable $th) {
     }
+
     return $response;
 })->where('any', '.*')->middleware(['auth:sanctum']);
